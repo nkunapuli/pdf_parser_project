@@ -1,0 +1,23 @@
+seed: 42
+max_epochs: 2
+max_steps: 1000
+val_check_interval: 0.5
+check_val_every_n_epoch: 1
+val_batches: 0.1
+gradient_clip_val: 1.0
+accumulate_grad_batches: 1
+max_length: 3584
+input_size: [896, 672]
+align_long_axis: True
+window_size: 15
+encoder_layer: 3
+decoder_layer: 4
+dataset_paths:
+  - "./arxiv/index.jsonl"
+  - "./index.jsonl"
+num_nodes: 1
+result_path: "/Users/nkunapuli/Documents/Projects/Exa/arxiv/results"
+exp_name: "NougatTraining"
+exp_version: "20230430"
+resume_from_checkpoint_path: null
+debug: false

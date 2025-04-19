@@ -30,14 +30,3 @@ I wrote a second scraper which downloaded PDFs and XML files, and used Pandoc to
 ```
 python plos_downloader.py 100
 ```
-
-## Training with Nougat
-Unfortunately I did not have time to finish this part, as it was a lot more complicated than I expected.
-
-The first parts were successful. First, you have to run one of their scripts which converts the HTML and PDF files into Markdown and PNG files which the model actually trains on. This step worked, although many of the conversions failed. From 80 papers, maybe only 30-35 would successfully convert to Markdown and PNG. This suggests that for however many papers you wish to train on, you must initially download at least twice as many, and probably even more.
-
-The instructions for creating the dataset of Markdown and PNGs (assuming you already have the PDF and HTML folders after running either `arxiv_downloader.py` or `plos_downloader.py`) are here: https://github.com/facebookresearch/nougat?tab=readme-ov-file.
-
-However, I was unable to start actual model training because the setup took a very long time. Their training script requires a configuration YAML file, but they do not specify which parameters are necessary and what values they should take. Some parameters are explicitly given in the paper (such as `input_size`), but others have to be guessed at (such as `encoder_layer`), or are referenced from other papers (such as the tokenizer, which points to the Galactica paper and itself does not describe the tokenizer in any detail). I got a lot of the parameters figured out, and was in the process of training a byte-pair encoding tokenizer on my training data, but ultimately time ran out before I could try to train the model. 
-
-The `train.py` and `lightning_module.py` files are directly from Nougat, as they are needed for training. `train_nougat.yaml` within the `config` folder contains my best estimates for the hyperparameters for training, but it is incomplete.
